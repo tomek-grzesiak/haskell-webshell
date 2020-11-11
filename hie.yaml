@@ -1,0 +1,10 @@
+cradle:
+  stack:
+    - path: "./src"
+      component: "hwesh:lib"
+
+    - path: "./app/Main.hs"
+      component: "hwesh:exe:wesh"
+
+    - path: "./tests"
+      component: "hwesh:test:tests"

@@ -4,6 +4,7 @@
 {-# LANGUAGE TemplateHaskell #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE ViewPatterns #-}
+
 module Wesh.App where
 
 import Data.Aeson as A
@@ -13,7 +14,8 @@ import Data.Pool (Pool)
 import Database.Persist.Sql (SqlBackend, runSqlPool)
 import RIO hiding (Handler)
 import RIO.Text as T
-import Wesh.Connect
+
+import Wesh.Connect ( attemptCommunication )
 import Wesh.Terminal (resizeTerminal)
 import Wesh.Types
 import Yesod
@@ -66,7 +68,7 @@ getTerminalR token = do
 postResizeTerminalR :: Token -> HandlerFor App Value
 postResizeTerminalR token = do
   App {appWeshEnv} <- getYesod
-  parseJsonBody >>= \case
+  parseCheckJsonBody >>= \case
     A.Error err ->
       sendStatusJSON badRequest400 $
       makeError ("JSON Parse Error: " <> T.pack err)

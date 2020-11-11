@@ -60,7 +60,7 @@ optionsParser defDataDir =
        ("Database file for the SQLite backend (default: '" <> defSqlite <> "')"))
   where
     defPort = 3000
-    defHost = "localhost"
+    defHost = "redhat.mshome.net"
     defSqlite = defDataDir </> "db.sqlite"
 
 main :: IO ()
